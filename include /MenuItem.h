@@ -1,7 +1,8 @@
 #pragma once
 #include <string>
 using namespace std;
-class MenuItem {
+class MenuItem
+ {
 public:
     string name;
     double price;
