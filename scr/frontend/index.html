@@ -77,17 +77,23 @@
         }
 
         // 3. 向 C++ 後端索取最新的購物車明細與計算結果
-        function updateReceipt() {
-            fetch('/api/receipt')
-                .then(response => response.text())
-                .then(text => {
-                    document.getElementById('receipt-display').innerText = text;
-                });
-        }
+       // 💡 修改 index.html 裡面的 updateReceipt 函數
+      function updateReceipt() {
+    // 加上亂數參數防止瀏覽器快取 (Cache) 導致畫面不更新
+       ㄋfetch('/api/receipt?t=' + new Date().getTime())
+        .then(response => response.text())
+        .then(text => {
+            const display = document.getElementById('receipt-display');
+            if (display) {
+                display.innerText = text; // 強制將最新的 C++ 明細文字塞進黑框
+            }
+        })
+        .catch(err => console.error("重整失敗:", err));
+}
 
         // 4. 結帳按鈕
         function checkout() {
-            alert("結帳成功！請查看您的 Linux 終端機，C++ 後端已同步處理訂單。");
+            alert("結帳成功！");
         }
     </script>
 </body>
