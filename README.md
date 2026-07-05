@@ -54,8 +54,8 @@ g++ main.cpp OrderSystem.cpp Menu.cpp MenuItem.cpp Order.cpp OrdeItem.cpp -o mai
     Menu: 提供動態菜單數據接口。
 
 
-
-＃＃ 挑戰與克服 
+---
+## 挑戰與克服 
 1. 前後端通訊架構的落差
 
     困難： 傳統 C++ 程式與 Web 瀏覽器對於資料的認知方式完全不同。C++ 依賴記憶體指標與物件參照，而網頁依賴 JSON 文字格式。
@@ -66,8 +66,7 @@ g++ main.cpp OrderSystem.cpp Menu.cpp MenuItem.cpp Order.cpp OrdeItem.cpp -o mai
 
     困難： 網頁點餐按鈕與後端記憶體狀態不一致。使用者點餐後，網頁不會自動刷新，導致購物車顯示滯後。
 
-    解決方式： 導入了 JavaScript 的 Fetch API 配合「強制快取更新機制 (Cache busting)」。透過在 API 請求中加入時間戳記 (Timestamp)，確保每次點餐請求都能獲取最新的 C++ 後端狀態，達成零延遲的即時體驗。
-
+    解決方式： 導入了 JavaScript 的 Fetch API 配合強制快取更新機制」。透過在 API 請求中加入時間戳記 ，確保每次點餐請求都能獲取最新的 C++ 後端狀態，達成零延遲的即時體驗。
 3. C++ 連結錯誤與模組化管理
 
     困難： 隨著系統規模擴大，類別間的相依性導致編譯連結時出現 undefined reference 錯誤，這反映了對專案目錄結構與編譯器路徑的掌握度不足。
@@ -88,7 +87,14 @@ g++ main.cpp OrderSystem.cpp Menu.cpp MenuItem.cpp Order.cpp OrdeItem.cpp -o mai
    4.按下結帳按鈕並在終端機可確認相對應明細按下0後輸出結帳成功
    <img width="990" height="554" alt="圖片" src="https://github.com/user-attachments/assets/f229a908-2d9a-43cf-8681-62d4318dc4b2" />
 
+---
+## 專題開發心得：從終端機走向網路服務的技術蛻變
+1. 對於物件導向設計的重新認識
 
+過去寫程式時，物件導向對我來說只是一種語法規則；但在本次開發中，我真正體會到了模組化的力量。當我將 OrderSystem、Menu、Order 與 OrderItem 拆解獨立後，我發現原本以為很複雜的購物車即時運算，其實只要調用各個物件的介面就能完成。這種將複雜問題拆解為單純物件互動的思維，是我在本次專題中最深刻的技術成長。
+2. 技術突破：打破 C++ 的邊界
+
+開發過程中最大的困難，在於如何讓純 C++ 語言與網路協定對接。起初，我對於如何處理 HTTP 請求感到迷茫，但透過 cpp-httplib 這一類輕量級網路庫的應用，我理解了：無論什麼語言，核心都是資料的流動。只要理解了 HTTP 的 Request 與 Response 模型，無論是 C++、Python 還是 Node.js，本質邏輯皆是互通的。這份專題讓我學會了如何讓 C++ 這個傳統的高效語言，也能擁有現代化服務的靈魂。
 
 
    
